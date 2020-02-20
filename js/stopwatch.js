@@ -1,5 +1,6 @@
 function Stopwatch(elem) {
     var time = 0;
+    var timeStart = new Date(time);
     var interval;
     var offset;
 
@@ -17,7 +18,8 @@ function Stopwatch(elem) {
     }
 
     function timeFormatter(timeInMilliseconds) {
-        var time = new Date(timeInMilliseconds)
+        var time = new Date(timeInMilliseconds);
+        var hours = time.getHours().toString() - timeStart.getHours().toString();
         var minutes = time.getMinutes().toString();
         var seconds = time.getSeconds().toString();
         var milliseconds = time.getMilliseconds().toString();
@@ -33,8 +35,8 @@ function Stopwatch(elem) {
         while (milliseconds.length < 3) {
             milliseconds = '0' + milliseconds
         }
-
-        return minutes + ' : ' + seconds + ' . ' + milliseconds
+        
+        return hours + ' : ' +  minutes + ' : ' + seconds + ' . ' + milliseconds;
     }
 
     this.isOn = false;
@@ -57,6 +59,6 @@ function Stopwatch(elem) {
 
     this.reset = function() {
         time = 0;
-        elem.textContent = '00 : 00 . 000'
+        elem.textContent = '0 : 00 : 00 . 000'
     };
 }
